@@ -12,6 +12,10 @@
         <entry key="..\:/AndroidProjects/SerebryanskiyGuitarWorld/app/src/main/res/layout/category_item.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/SerebryanskiyGuitarWorld/app/src/main/res/layout/home_category_item.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/SerebryanskiyGuitarWorld/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14074074074074075" />
+        <entry key="..\:/SDk/20-06/app/src/main/res/layout/activity_catalog.xml" value="0.22" />
+        <entry key="..\:/SDk/20-06/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/SDk/20-06/app/src/main/res/layout/home_category_item.xml" value="0.1" />
+        <entry key="..\:/SDk/20-06/app/src/main/res/layout/product_item.xml" value="0.5" />
       </map>
     </option>
   </component>
