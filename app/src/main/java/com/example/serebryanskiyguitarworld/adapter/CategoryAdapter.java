@@ -1,5 +1,6 @@
 package com.example.serebryanskiyguitarworld.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.serebryanskiyguitarworld.Catalog;
 import com.example.serebryanskiyguitarworld.R;
 import com.example.serebryanskiyguitarworld.model.Category;
+import com.example.serebryanskiyguitarworld.model.Product;
 
 import java.util.List;
 
@@ -24,6 +27,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         this.categories = categories;
     }
 
+
+
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,8 +37,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.categoryTitle.setText(categories.get(position).getTitle());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

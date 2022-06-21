@@ -1,6 +1,8 @@
 package com.example.serebryanskiyguitarworld.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.serebryanskiyguitarworld.Authorizaton;
+import com.example.serebryanskiyguitarworld.Catalog;
+import com.example.serebryanskiyguitarworld.Home;
 import com.example.serebryanskiyguitarworld.R;
 import com.example.serebryanskiyguitarworld.model.HomeCategory;
 
@@ -42,6 +47,14 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
 
         holder.homeCategoryImage.setImageResource(imageId);
         holder.homeCategoryTitle.setText(homeCategories.get(position).getTitle());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), Catalog.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

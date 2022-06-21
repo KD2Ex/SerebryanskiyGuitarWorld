@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SerebryanskiyGuitarWorld">
         <activity
+            android:name=".Product"
+            android:exported="false" />
+        <activity
             android:name=".Catalog"
             android:exported="false" />
         <activity

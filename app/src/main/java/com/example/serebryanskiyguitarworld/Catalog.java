@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.example.serebryanskiyguitarworld.adapter.CategoryAdapter;
 import com.example.serebryanskiyguitarworld.adapter.ProductAdapter;
@@ -22,6 +25,10 @@ public class Catalog extends AppCompatActivity {
     RecyclerView productRecycler;
     CategoryAdapter categoryAdapter;
     ProductAdapter productAdapter;
+
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase db;
+    Cursor userCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,39 +48,74 @@ public class Catalog extends AppCompatActivity {
         categoryList.add(new Category(6, "Уход"));
 
 
+
+
+
         setCategoryRecycler(categoryList);
 
+        databaseHelper = new DatabaseHelper(getBaseContext());
+        db = databaseHelper.getReadableDatabase();
+        userCursor = db.rawQuery("select * from " + DatabaseHelper.PRODUCTS, null);
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product(1, 70000,
-                "Inspector", "Electric guita\n6 string",
-                "product1", true));
+
+        while(userCursor.moveToNext()) {
+            products.add(new Product(
+                    userCursor.getInt(0),
+                    userCursor.getString(1),
+                    userCursor.getString(2),
+                    userCursor.getInt(3),
+                    userCursor.getString(4),
+                    true,
+                    1
+            ));
+        }
+
+
+       /* products.add(new Product(1, 70000,
+                "Inspector", "Electric guitar\n6 string",
+                "product1", true, 1));
 
         products.add(new Product(2, 100000,
                 "Solar A1.6", "Electric guitar\n6 string",
-                "product2", false));
+                "product2", false, 1));
 
-        products.add(new Product(3, 70000,
+        products.add(new Product(3, 1700,
                 "Jazz III XL Series", "Guitar pick 1.38mm",
-                "product3", true));
+                "product3", true, 2));
 
-        products.add(new Product(4, 70000,
+        products.add(new Product(4, 700,
                 "Daddario 10-46", "Strings for electric gutiar",
-                "product4", false));
+                "product4", false, 3));
 
         products.add(new Product(5, 70000,
                 "Описание", "Название",
-                "product5", true));
+                "product5", true, 3));
 
         products.add(new Product(6, 70000,
                 "Описание", "Название",
-                "accs", true));
+                "accs", true, 4));
 
         products.add(new Product(7, 70000,
                 "Название", "описание",
-                "guitar_category", true));
+                "guitar_category", true, 4));*/
 
         setProductRecycler(products);
+
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                productAdapter.filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                productAdapter.filter(newText);
+                return true;
+            }
+        });
 
     }
 
@@ -86,6 +128,8 @@ public class Catalog extends AppCompatActivity {
 
         categoryAdapter = new CategoryAdapter(this, categoryList);
         categoryRecycler.setAdapter(categoryAdapter);
+
+
     }
 
     private void setProductRecycler(List<Product> products) {
@@ -101,5 +145,11 @@ public class Catalog extends AppCompatActivity {
         finish();
         return true;
     }
+
+    public static void showProductsByCategory(int category) {
+
+    }
+
+
 
 }

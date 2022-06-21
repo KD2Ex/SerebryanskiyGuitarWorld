@@ -79,6 +79,10 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this, Catalog.class);
         startActivity(intent);
     }
+
+    public Home getThis() {
+        return this;
+    }
 }
 
 /*

@@ -4,18 +4,28 @@ public class Product {
 
     int id;
     int price;
+    int category;
     String title;
     String description;
     String image;
     boolean isAvailable;
 
-    public Product(int id, int price, String title, String description, String image, boolean isAvailable) {
+    public Product(int id, String title, String description, int price, String image, boolean isAvailable, int category) {
         this.id = id;
         this.price = price;
         this.title = title;
         this.description = description;
         this.image = image;
         this.isAvailable = isAvailable;
+        this.category = category;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 
     public int getId() {
