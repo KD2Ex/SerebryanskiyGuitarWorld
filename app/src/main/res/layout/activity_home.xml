@@ -8,11 +8,6 @@
     android:layout_marginLeft="20sp"
     android:layout_marginRight="20sp"
     tools:context=".Home">
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:id="@+id/toolbar"
-        />
 
     <TextView
         android:id="@+id/textView3"

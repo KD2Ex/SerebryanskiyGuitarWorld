@@ -40,12 +40,11 @@ public class Registration extends AppCompatActivity {
         EditText login = (EditText)findViewById(R.id.login);
         EditText password = (EditText)findViewById(R.id.password);
 
-        db = databaseHelper.getReadableDatabase();
 
         if(!login.getText().toString().equals("") && 
             !password.getText().toString().equals("")) {
 
-            db = databaseHelper.getReadableDatabase();
+            db = databaseHelper.open();
 
             ContentValues contentValues = new ContentValues();
             contentValues.put(DatabaseHelper.USERS_LOGIN, login.getText().toString());
@@ -55,6 +54,8 @@ public class Registration extends AppCompatActivity {
 
             Toast.makeText(this, "Вы успешно зарегистрированы", Toast.LENGTH_SHORT).show();
             finish();
+
+            db.close();
             
         }
     }

@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
 
 import com.example.serebryanskiyguitarworld.adapter.CategoryAdapter;
@@ -47,14 +49,11 @@ public class Catalog extends AppCompatActivity {
         categoryList.add(new Category(5, "Прочее"));
         categoryList.add(new Category(6, "Уход"));
 
-
-
-
-
         setCategoryRecycler(categoryList);
 
-        databaseHelper = new DatabaseHelper(getBaseContext());
-        db = databaseHelper.getReadableDatabase();
+        databaseHelper = new DatabaseHelper(this);
+        databaseHelper.create_db();
+        db = databaseHelper.open();
         userCursor = db.rawQuery("select * from " + DatabaseHelper.PRODUCTS, null);
 
         List<Product> products = new ArrayList<>();
@@ -71,34 +70,9 @@ public class Catalog extends AppCompatActivity {
             ));
         }
 
+        db.close();
+        userCursor.close();
 
-       /* products.add(new Product(1, 70000,
-                "Inspector", "Electric guitar\n6 string",
-                "product1", true, 1));
-
-        products.add(new Product(2, 100000,
-                "Solar A1.6", "Electric guitar\n6 string",
-                "product2", false, 1));
-
-        products.add(new Product(3, 1700,
-                "Jazz III XL Series", "Guitar pick 1.38mm",
-                "product3", true, 2));
-
-        products.add(new Product(4, 700,
-                "Daddario 10-46", "Strings for electric gutiar",
-                "product4", false, 3));
-
-        products.add(new Product(5, 70000,
-                "Описание", "Название",
-                "product5", true, 3));
-
-        products.add(new Product(6, 70000,
-                "Описание", "Название",
-                "accs", true, 4));
-
-        products.add(new Product(7, 70000,
-                "Название", "описание",
-                "guitar_category", true, 4));*/
 
         setProductRecycler(products);
 
@@ -150,6 +124,11 @@ public class Catalog extends AppCompatActivity {
 
     }
 
+
+    public void onClick (View view) {
+        Intent intent = new Intent(this, Cart.class);
+        startActivity(intent);
+    }
 
 
 }

@@ -16,7 +16,7 @@ public class Cart extends AppCompatActivity {
 
     public void onClick(View view) {
 
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Catalog.class);
         startActivity(intent);
 
     }

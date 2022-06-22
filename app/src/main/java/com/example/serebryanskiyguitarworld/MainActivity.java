@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         databaseHelper = new DatabaseHelper(getApplicationContext());
+        databaseHelper.create_db();
     }
 
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         EditText login = (EditText)findViewById(R.id.editTextLogin);
         EditText password = (EditText)findViewById(R.id.editTextPassword);
 
-        db = databaseHelper.getReadableDatabase();
+        db = databaseHelper.open();
         userCursor = db.rawQuery("select * from " + DatabaseHelper.USERS, null);
 
         while(userCursor.moveToNext()) {
